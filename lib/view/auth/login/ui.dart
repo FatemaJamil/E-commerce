@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:my_ecommerce/view/product/ui.dart';
 import 'package:my_ecommerce/view/widget/button.dart';
 import 'package:my_ecommerce/view/widget/textfiled.dart';
 
@@ -60,13 +61,18 @@ class _LoginScreenState extends State<LoginScreen> {
               }, title: 'password'),
 
 
-            CustomButton(title: "Log in", onTap: (){
+            CustomButton(title: "Log in", onTap: ()async{
 
 
               if(_formkey.currentState!.validate()){
 
 
-                LoginController.Login(phone : phoneC.text, password : passC.text);
+                var status = await LoginController.Login(phone : phoneC.text, password : passC.text);
+                log("===${status}===");
+                if (status ){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> ProductScreen()));
+                }
+
 
 
               }

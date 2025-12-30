@@ -6,7 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class LoginController {
-  static Future<void> Login({
+  static Future<bool> Login({
     required  phone,
     required  password,
   }) async {
@@ -41,10 +41,14 @@ class LoginController {
         storage.write(key: "token", value: data);
         EasyLoading.showSuccess("Login Success");
 
+        return true;
+
       } else if (res.statusCode == 422) {
         EasyLoading.showError("Phone or password incorrect");
+        return false;
       } else {
         EasyLoading.showError("Something went wrong");
+        return true;
       }
 
     } catch (e) {
@@ -52,5 +56,6 @@ class LoginController {
       log("error: $e");
       EasyLoading.showError("Something went wrong");
     }
+    return false;
   }
 }

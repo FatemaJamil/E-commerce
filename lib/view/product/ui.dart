@@ -45,7 +45,7 @@ class _ProductScreenState extends State<ProductScreen> {
           crossAxisCount: 2,
           crossAxisSpacing: 8,
           mainAxisSpacing: 10,
-          childAspectRatio: .8,
+          childAspectRatio: .2,
         ),
         itemBuilder: (context, index) => ProductCard(data: productList[index]),
       ),
