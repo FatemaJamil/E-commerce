@@ -40,38 +40,39 @@ class _HomeScreenState extends State<HomeScreen> {
   List sliderList=[];
   List categoryList=[];
   Map sellingData={};
+  bool isLoading = true;
 
   fetchSliderData()async{
    sliderList =  await SliderController().getSliderData();
-   setState(() {});
+   fetchCategoryData();
   }
 
-  fetchCategoryData()async{
+ fetchCategoryData()async{
     categoryList =  await CategoryController().getCategoryData();
-    setState(() {});
+    fetchSellingData();
   }
 
   fetchSellingData()async{
     sellingData =  await SellingTypeController().getSellingData();
     log("====${sellingData['hot-selling']}");
+    isLoading = false;
     setState(() {});
   }
 
 
-
   @override
   void initState() {
-    fetchSliderData();
-    fetchCategoryData();
-    fetchSellingData();
+    isLoading = true;
+     fetchSliderData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: CustomAppBar(),
-      body: ListView(
+      body: isLoading== true? Center(child: CircularProgressIndicator()): ListView(
         scrollDirection: Axis.vertical,
         children: [
           sliderList.isEmpty? SizedBox() :
@@ -153,6 +154,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 CustomText(text:"Hot Selling",color: Colors.black,),
                 InkWell(
+                  onTap: (){
+
+                  },
                     child: CustomText(text:"See all",color: Colors.orange,)),
               ],
             ),

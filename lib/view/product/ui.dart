@@ -37,6 +37,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: CustomAppBar(),
       body: isLoading == true? Center(child: CircularProgressIndicator()): GridView.builder(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -45,7 +46,7 @@ class _ProductScreenState extends State<ProductScreen> {
           crossAxisCount: 2,
           crossAxisSpacing: 8,
           mainAxisSpacing: 10,
-          childAspectRatio: .2,
+          childAspectRatio: .9,
         ),
         itemBuilder: (context, index) => ProductCard(data: productList[index]),
       ),
