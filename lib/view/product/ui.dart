@@ -8,7 +8,11 @@ import 'package:my_ecommerce/view/widget/text.dart';import '../../controller/pro
 import '../widget/productcard.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+  const ProductScreen({super.key, required this.title});
+
+
+
+  final String title;
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -20,6 +24,7 @@ class _ProductScreenState extends State<ProductScreen> {
   bool isLoading = true ;
 
   fetchData()async{
+    log("=====${widget.title}");
     isLoading = true ;
     setState(() {});
     await Future.delayed(Duration(seconds: 2));

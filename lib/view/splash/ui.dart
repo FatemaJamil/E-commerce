@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:my_ecommerce/view/auth/ui.dart';
+import 'package:my_ecommerce/view/home/ui.dart';
 import 'package:my_ecommerce/view/product/ui.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(t==null){
       Navigator.push(context, MaterialPageRoute(builder: (c)=>AuthScreen()));
     }else{
-      Navigator.push(context, MaterialPageRoute(builder: (c)=>ProductScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (c)=>HomeScreen()));
 
     }
 

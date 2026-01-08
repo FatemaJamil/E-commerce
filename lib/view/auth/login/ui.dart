@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:my_ecommerce/view/home/ui.dart';
 import 'package:my_ecommerce/view/product/ui.dart';
 import 'package:my_ecommerce/view/widget/button.dart';
 import 'package:my_ecommerce/view/widget/textfiled.dart';
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 var status = await LoginController.Login(phone : phoneC.text, password : passC.text);
                 log("===${status}===");
                 if (status ){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> ProductScreen()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
                 }
 
 

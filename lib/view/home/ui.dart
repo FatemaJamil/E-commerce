@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ecommerce/view/product/ui.dart';
 import 'package:my_ecommerce/view/widget/appbar.dart';
 import 'package:my_ecommerce/view/widget/text.dart';
 
@@ -155,7 +156,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 CustomText(text:"Hot Selling",color: Colors.black,),
                 InkWell(
                   onTap: (){
-
+                  log("=====");
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen(title: "hot-selling",)));
                   },
                     child: CustomText(text:"See all",color: Colors.orange,)),
               ],
