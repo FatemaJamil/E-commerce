@@ -28,7 +28,7 @@ class _ProductScreenState extends State<ProductScreen> {
     isLoading = true ;
     setState(() {});
     await Future.delayed(Duration(seconds: 2));
-    productList= await GetProductController().getProduct();
+    productList= await GetProductController().getProduct(t:widget.title);
     log("===${productList.length}");
     isLoading = false;
     setState(() {});

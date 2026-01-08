@@ -115,33 +115,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: categoryList.length,
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemBuilder: (context, i) => Stack(
-
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(2),
-                      height: 109,
-                      width: 90,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage("https://eplay.coderangon.com/storage/${categoryList[i]['image']}"
-                            )),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-
-                    Positioned(
-                      bottom: 30,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: CustomText(text: "${categoryList[i]['name']} ",color: Colors.white,fw: FontWeight.w600,),
-                        height: 18,
+                itemBuilder: (context, i) => InkWell(
+                  onTap: (){
+                    log("===${categoryList[i]['id']}===");
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen(title: "${categoryList[i]['id']}",)));
+                  },
+                  child: Stack(
+                  
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(2),
+                        height: 109,
                         width: 90,
-                        color: Color(0xff201E1FCF),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage("https://eplay.coderangon.com/storage/${categoryList[i]['image']}"
+                              )),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                       ),
-                    ),
-                  ],
+                  
+                      Positioned(
+                        bottom: 30,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: CustomText(text: "${categoryList[i]['name']} ",color: Colors.white,fw: FontWeight.w600,),
+                          height: 18,
+                          width: 90,
+                          color: Color(0xff201E1FCF),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -204,6 +210,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 CustomText(text:"New arrival",color: Colors.black,),
                 InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen(title: "latest",)));
+                  },
                     child: CustomText(text:"See all",color: Colors.orange,)),
               ],
             ),
