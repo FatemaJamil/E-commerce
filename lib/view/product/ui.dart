@@ -35,7 +35,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   searchData({required String search}){
     log("===search ${search}===");
-    productList = productFinalList.where((v)=>['title'].toString().toLowerCase().contains(search.toLowerCase())).toList();
+    productList = productFinalList.where((v)=>v['title'].toString().toLowerCase().contains(search.toLowerCase())).toList();
     log("====pl: ${productList.length}");
     setState(() {});
   }

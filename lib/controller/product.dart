@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class GetProductController{
 
-  Future<List> getProduct ({required String t })async{
+  Future<List>getProduct({required String t })async{
 
     try{
       log("===API : ${t}");
