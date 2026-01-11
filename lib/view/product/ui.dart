@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:my_ecommerce/view/widget/appbar.dart';
+import 'package:my_ecommerce/view/widget/text.dart';
 import '../../controller/product.dart';
 
 import '../widget/productcard.dart';
@@ -71,7 +72,8 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
           ),
           isLoading == true
-              ? Center(child: CircularProgressIndicator())
+              ? Center(child: CircularProgressIndicator()) :
+              productList.isEmpty ? Center(child: CustomText(text: "data not found"))
               : Expanded(
                 child: GridView.builder(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:my_ecommerce/view/bottom_navigation/ui.dart';
 import 'package:my_ecommerce/view/home/ui.dart';
+import 'package:my_ecommerce/view/shipping/ui.dart';
 
 
 
@@ -10,7 +12,7 @@ void main (){
     MaterialApp(
       builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
-      home:HomeScreen()
+      home:ShippingScreen()
     )
   );
 
