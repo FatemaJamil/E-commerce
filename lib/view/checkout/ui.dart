@@ -28,7 +28,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text("Shipping Information",style: TextStyle(fontSize: 20,color: Colors.black),),
             Container(
               height: 100,
               width: double.infinity,
@@ -54,7 +56,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ],
                 ),
               )
-            )
+            ),
           ],
         ),
       ),
