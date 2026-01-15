@@ -17,6 +17,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
   autoNavigate()async{
+    await Future.delayed(Duration(seconds: 3));
 
     FlutterSecureStorage storage= FlutterSecureStorage();
     var t = await storage.read(key: "token");
@@ -27,8 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.push(context, MaterialPageRoute(builder: (c)=>HomeScreen()));
 
     }
-
-
   }
 
 
@@ -41,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Image.asset("assets/images/logo.jpg"),
       ),

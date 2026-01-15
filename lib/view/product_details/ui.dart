@@ -4,8 +4,11 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ecommerce/controller/product-details.dart';
+import 'package:my_ecommerce/view/checkout/ui.dart';
 import 'package:my_ecommerce/view/widget/appbar.dart';
 import 'package:my_ecommerce/view/widget/text.dart';
+
+import '../../widget/button.dart';
 
 
 
@@ -114,7 +117,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                 SizedBox(height: 10,),
                CustomText(text: "Details", color: Colors.black,),
                 CustomText(text: "${data['description']}", color: Colors.black,),
+                SizedBox(height: 20),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomButton(title:"Buy Now", onTap:(){
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>CheckoutScreen()));
+                    } ),
+                  ],
+                )
               ],
+
             ),
           ),
 

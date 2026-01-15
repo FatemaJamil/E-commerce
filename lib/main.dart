@@ -4,6 +4,7 @@ import 'package:my_ecommerce/view/bottom_navigation/ui.dart';
 import 'package:my_ecommerce/view/checkout/ui.dart';
 import 'package:my_ecommerce/view/home/ui.dart';
 import 'package:my_ecommerce/view/shipping/ui.dart';
+import 'package:my_ecommerce/view/splash/ui.dart';
 
 
 
@@ -13,7 +14,7 @@ void main (){
     MaterialApp(
       builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
-      home:CheckoutScreen()
+      home:SplashScreen()
     )
   );
 
