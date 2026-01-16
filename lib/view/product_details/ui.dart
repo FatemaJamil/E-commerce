@@ -122,7 +122,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CustomButton(title:"Buy Now", onTap:(){
-                      Navigator.push(context, MaterialPageRoute(builder: (c)=>CheckoutScreen()));
+                      log("==$data");
+
+                      Map pData={
+                        "id" : data['id'],
+                        "title" : data['title'],
+                        "brand": data['brand'],
+                        "price" : data['price'],
+                        "old-price" : data['old-price'],
+                        "image" : data['image'],
+
+                      };
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>CheckoutScreen(productData: pData,)));
                     } ),
                   ],
                 )

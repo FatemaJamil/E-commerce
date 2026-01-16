@@ -1,15 +1,35 @@
 
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:my_ecommerce/view/widget/text.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({super.key});
+  const CheckoutScreen({super.key, required this.productData});
+
+  final Map productData;
+
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
+
+  Map product ={};
+
+  getProductData()async{
+    product = widget.productData;
+    log("====ppp : ${product}");
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getProductData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +76,36 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ],
                 ),
               )
+            ),
+
+            SizedBox(height: 20),
+            Card(
+              child: Row(
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      image:DecorationImage(image: NetworkImage("https://eplay.coderangon.com/storage/${product['image']}"))
+                    ),
+                  ),
+                  SizedBox(width: 10,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    CustomText(text: "${product['title']}",color: Colors.black,),
+                    CustomText(text: "Brand : ${product['brand']}",color: Colors.black,),
+                    Row(
+
+                      spacing: 10,
+                      children: [
+                        CustomText(text:"BDT: ${product['price']}",color: Colors.black,),
+                        CustomText(text: "${product['old_price']}",td: TextDecoration.lineThrough,),
+                      ],
+                    )
+                  ],)
+                ],
+              ),
             ),
           ],
         ),
