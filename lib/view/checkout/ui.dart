@@ -3,13 +3,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:my_ecommerce/controller/checkout.dart';
 
 import '../../widget/button.dart';
 import '../../widget/text.dart';
 import '../shipping/ui.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({super.key});
+  const CheckoutScreen({super.key, required this.productData});
+  final Map productData;
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -17,6 +19,7 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   Map userData = {};
+  Map product = {};
 
   getUserData() async {
     FlutterSecureStorage storage = FlutterSecureStorage();
@@ -170,7 +173,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             ),
             Spacer(),
-            CustomButton(title: "Checkout", onTap: () {}),
+            CustomButton(title: "Checkout", onTap: ()async {
+              var checkout ={
+                "customer_name" : userData['name'],
+                "customer_phone" : userData['phone'],
+                "payment_method" : "cod",
+                "items" : [
+                  {
+                    "product_id": product['id'],
+                    "product_name": product['name'],
+                    "price": product['price'],
+                  }],
+                    "address" :{ "street" :userData['street'], "upazila" :userData['upazila'], "district" :userData['district'],}};
+                  log("===check : ${jsonEncode(checkout)}");
+                 await CheckOutService().sentData(data: checkout);
+            })
           ],
         ),
       ),
