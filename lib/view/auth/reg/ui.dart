@@ -82,9 +82,9 @@ class _LoginScreenState extends State<RegScreen> {
           
           
          isLoading == true ? Center(child: CircularProgressIndicator()) : CustomButton(title: 'Sign Up',onTap: ()async {
-            // if(_formkey.currentState!.validate()){
-            //   return;
-            // }
+            if(_formkey.currentState!.validate()){
+             return;
+             }
 
             var a =  {
 

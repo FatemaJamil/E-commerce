@@ -1,112 +1,176 @@
-
-
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:my_ecommerce/view/widget/text.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../../widget/button.dart';
+import '../../widget/text.dart';
+import '../shipping/ui.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({super.key, required this.productData});
-
-  final Map productData;
-
+  const CheckoutScreen({super.key});
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
+  Map userData = {};
 
-  Map product ={};
-
-  getProductData()async{
-    product = widget.productData;
-    log("====ppp : ${product}");
+  getUserData() async {
+    FlutterSecureStorage storage = FlutterSecureStorage();
+    var d = await storage.read(key: "shipping");
+    log("======D : $d");
+    if(d != null){
+      userData = jsonDecode(d);
+      log("======userData : ${userData['name']}");
+    }
     setState(() {});
   }
 
   @override
   void initState() {
-    getProductData();
+    getUserData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("CheckOut"),
-        leading: InkWell(
-            onTap: (){
-              Navigator.pop(context);
+        title: CustomText(text: "Checkout", fSize: 25, color: Colors.black),
+        actions: [
+          InkWell(
+            onTap: () {
+              FlutterSecureStorage storage = FlutterSecureStorage();
+              storage.delete(key: "shipping");
             },
-            child: Icon(Icons.arrow_back)),
-        actions: [Icon(Icons.delete),SizedBox(width: 10,)] ,
-
-
+            child: Icon(Icons.delete),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Shipping Information",style: TextStyle(fontSize: 20,color: Colors.black),),
-            Container(
-              height: 100,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.grey.shade200,
+            CustomText(text: "Shipping Information", fSize: 20),
+            userData.isEmpty
+                ? InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingScreen())).then((b){
+                  getUserData();
+                });
+              },
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        spacing: 10,
+                        children: [
+                          Icon(Icons.add_box_rounded),
+                          CustomText(text: "Add Shipping Information"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            )
+                : Stack(
+              children: [
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
                       children: [
-                        Text("Name : Fatema Jamil"),
-                        Icon(Icons.edit_note_outlined)
+                        Row(
+                          children: [
+                            CustomText(text: "Name : "),
+                            Expanded(child: CustomText(text: "${userData['name']}")),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            CustomText(text: "Phone : "),
+                            Expanded(child: CustomText(text: "${userData['phone']}")),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(text: "Address : "),
+                            Expanded(
+                              child: CustomText(
+                                text: "${userData['street']}, ${userData['upazila']}, ${userData['district']}",
+                                maxLine: 3,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                    Text("Phone : 01720083503"),
-                    Text("Address : "),
-                    Text("Amount :"),
-                  ],
+                  ),
                 ),
-              )
+                Positioned(
+                  top: 5,
+                  right: 5,
+                  child: InkWell(
+                     onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingScreen())).then((v) {
+                         getUserData();
+                       });
+                     },
+                    child: Icon(Icons.edit_note),
+                  ),
+                ),
+              ],
             ),
 
             SizedBox(height: 20),
+            CustomText(text: "Products", fSize: 20),
             Card(
               child: Row(
+                spacing: 20,
                 children: [
                   Container(
                     height: 100,
                     width: 100,
                     decoration: BoxDecoration(
-                      image:DecorationImage(image: NetworkImage("https://eplay.coderangon.com/storage/${product['image']}"))
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(
+                          "https://eplay.coderangon.com/storage/products/PgrKShWTkVMoWefUTr0YxLWiyRRrAXbl3joQrLXe.webp",
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(width: 10,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                    CustomText(text: "${product['title']}",color: Colors.black,),
-                    CustomText(text: "Brand : ${product['brand']}",color: Colors.black,),
-                    Row(
-
-                      spacing: 10,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(text:"BDT: ${product['price']}",color: Colors.black,),
-                        CustomText(text: "${product['old_price']}",td: TextDecoration.lineThrough,),
+                        CustomText(text: "Men's Classic Cotton Head Cap"),
+                        CustomText(text: "brand : "),
+                        Row(
+                          spacing: 10,
+                          children: [
+                            CustomText(text: "BDT 500", fSize: 16),
+                            CustomText(text: "600", td: TextDecoration.lineThrough),
+                          ],
+                        ),
                       ],
-                    )
-                  ],)
+                    ),
+                  ),
                 ],
               ),
             ),
+            Spacer(),
+            CustomButton(title: "Checkout", onTap: () {}),
           ],
         ),
       ),
