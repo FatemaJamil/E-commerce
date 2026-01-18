@@ -96,29 +96,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 : Stack(
               children: [
                 Card(
+                  color: Colors.orangeAccent,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         Row(
                           children: [
-                            CustomText(text: "Name : "),
-                            Expanded(child: CustomText(text: "${userData['name']}")),
+                            CustomText(text: "Name : ",color: Colors.black,),
+                            Expanded(child: CustomText(text: "${userData['name']}",color: Colors.black,)),
                           ],
                         ),
                         Row(
                           children: [
-                            CustomText(text: "Phone : "),
-                            Expanded(child: CustomText(text: "${userData['phone']}")),
+                            CustomText(text: "Phone : ",color: Colors.black,),
+                            Expanded(child: CustomText(text: "${userData['phone']}",color: Colors.black,)),
                           ],
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomText(text: "Address : "),
+                            CustomText(text: "Address : ",color: Colors.black,),
                             Expanded(
                               child: CustomText(
-                                text: "${userData['street']}, ${userData['upazila']}, ${userData['district']}",
+                                text: "${userData['street']}, ${userData['upazila']}, ${userData['district']}",color: Colors.black,
                                 maxLine: 3,
                               ),
                             ),
@@ -146,6 +147,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             SizedBox(height: 20),
             CustomText(text: "Products", fSize: 20,color: Colors.black,),
             Card(
+              color: Colors.orangeAccent,
               child: Row(
                 spacing: 20,
                 children: [
