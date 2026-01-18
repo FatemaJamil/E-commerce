@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:my_ecommerce/controller/checkout.dart';
 
+import '../../controller/checkout.dart';
 import '../../widget/button.dart';
 import '../../widget/text.dart';
+import '../home/ui.dart';
 import '../shipping/ui.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -25,16 +25,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     FlutterSecureStorage storage = FlutterSecureStorage();
     var d = await storage.read(key: "shipping");
     log("======D : $d");
-    if(d != null){
+    if (d != null) {
       userData = jsonDecode(d);
       log("======userData : ${userData['name']}");
     }
     setState(() {});
   }
 
+  getProductData() async {
+    product = widget.productData;
+    log("==PPP : $product");
+    setState(() {});
+  }
+
   @override
   void initState() {
     getUserData();
+    getProductData();
     super.initState();
   }
 
@@ -59,15 +66,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(text: "Shipping Information", fSize: 20),
+            CustomText(text: "Shipping Information", fSize: 20,color: Colors.black,),
             userData.isEmpty
                 ? InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingScreen())).then((b){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingScreen())).then((b) {
                   getUserData();
                 });
               },
               child: Card(
+                color: Colors.orangeAccent,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -77,7 +85,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         spacing: 10,
                         children: [
                           Icon(Icons.add_box_rounded),
-                          CustomText(text: "Add Shipping Information"),
+                          CustomText(text: "Add Shipping Information",color: Colors.black,),
                         ],
                       ),
                     ],
@@ -124,11 +132,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   top: 5,
                   right: 5,
                   child: InkWell(
-                     onTap: () {
+                    onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingScreen())).then((v) {
-                         getUserData();
-                       });
-                     },
+                        getUserData();
+                      });
+                    },
                     child: Icon(Icons.edit_note),
                   ),
                 ),
@@ -136,7 +144,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
 
             SizedBox(height: 20),
-            CustomText(text: "Products", fSize: 20),
+            CustomText(text: "Products", fSize: 20,color: Colors.black,),
             Card(
               child: Row(
                 spacing: 20,
@@ -147,9 +155,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: NetworkImage(
-                          "https://eplay.coderangon.com/storage/products/PgrKShWTkVMoWefUTr0YxLWiyRRrAXbl3joQrLXe.webp",
-                        ),
+                        image: NetworkImage("https://eplay.coderangon.com/storage/${product['image']}"),
                       ),
                     ),
                   ),
@@ -157,13 +163,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(text: "Men's Classic Cotton Head Cap"),
-                        CustomText(text: "brand : "),
+                        CustomText(text: "${product['title']}",color: Colors.black,),
+                        CustomText(text: "brand : ${product['brand']}",color: Colors.black,),
                         Row(
                           spacing: 10,
                           children: [
-                            CustomText(text: "BDT 500", fSize: 16),
-                            CustomText(text: "600", td: TextDecoration.lineThrough),
+                            CustomText(text: "BDT ${product['price']}", fSize: 16,color: Colors.black,),
+                            CustomText(text: " ${product['old_price']}",color: Colors.black, td: TextDecoration.lineThrough),
                           ],
                         ),
                       ],
@@ -173,21 +179,25 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             ),
             Spacer(),
-            CustomButton(title: "Checkout", onTap: ()async {
-              var checkout ={
-                "customer_name" : userData['name'],
-                "customer_phone" : userData['phone'],
-                "payment_method" : "cod",
-                "items" : [
-                  {
-                    "product_id": product['id'],
-                    "product_name": product['name'],
-                    "price": product['price'],
-                  }],
-                    "address" :{ "street" :userData['street'], "upazila" :userData['upazila'], "district" :userData['district'],}};
-                  log("===check : ${jsonEncode(checkout)}");
-                 await CheckOutService().sentData(data: checkout);
-            })
+            CustomButton(
+              title: "Checkout",
+              onTap: () async {
+                var checkout = {
+                  "customer_name": userData['name'],
+                  "customer_phone": userData['phone'],
+                  "payment_method": "cod",
+                  "items": [
+                    {"product_id": product['id'], "product_name": product['title'], "price": product['price'], "quantity": 1},
+                  ],
+                  "address": {"street": userData['street'], "upazila": userData['upazila'], "district": userData['district']},
+                };
+                log("========Check : ${jsonEncode(checkout)}=====");
+                bool status = await CheckOutService().sentData(data: checkout);
+                if (status == true) {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                }
+              },
+            ),
           ],
         ),
       ),

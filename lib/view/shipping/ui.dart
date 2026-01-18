@@ -54,7 +54,7 @@ class _LoginState extends State<ShippingScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: CustomText(text: "Shipping Information", fSize: 25, color: Colors.black),
+        title: CustomText(text: "Shipping Information", fSize: 25, ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
