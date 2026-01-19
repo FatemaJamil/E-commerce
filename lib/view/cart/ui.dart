@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_ecommerce/view/checkout/ui.dart';
+import 'package:my_ecommerce/view/widget/button.dart';
 import '../../controller/cart.dart';
 import '../../widget/text.dart';
 
@@ -15,7 +17,7 @@ class _CartScreenState extends State<CartScreen> {
   fetchData() async {
     var data = await CartGetController().getData();
     setState(() {
-      cartData = data; // ✅ setState needed
+      cartData = data;
     });
   }
 
@@ -102,6 +104,11 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: Container(
+        child: CustomButton(title: "Order Now", onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckoutScreen(productData: cartData)));
+        }),
       ),
     );
   }

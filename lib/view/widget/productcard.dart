@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:my_ecommerce/controller/add_to_cart.dart';
 import 'package:my_ecommerce/controller/product.dart';
 import 'package:my_ecommerce/view/product_details/ui.dart';
 import 'package:my_ecommerce/view/widget/text.dart';
@@ -69,7 +70,11 @@ class ProductCard extends StatelessWidget {
                   ),
 
                   InkWell(
-                    onTap: () {},
+                    onTap: () async{
+
+                      log("==${data['id']}");
+                      await AddToCartController().addToCart(id:data['id'] ,qty: 1);
+                    },
                     child: Container(
                       height: 30,
                       width: 85,

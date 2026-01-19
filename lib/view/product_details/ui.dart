@@ -121,7 +121,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               "old_price": data['old_price'],
               "image": data['image'],
             };
-            Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutScreen(productData: pData)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutScreen(productData: [pData])));
           },
         ),
       ),

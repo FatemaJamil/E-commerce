@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
     HomeScreen(),
     CartScreen(),
     OrderScreen(),
-    CheckoutScreen(productData:{}),
+    CheckoutScreen(productData: [],),
 
   ];
 

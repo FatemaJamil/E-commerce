@@ -11,7 +11,7 @@ import '../shipping/ui.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key, required this.productData});
-  final Map productData;
+  final List productData;
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -19,7 +19,7 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   Map userData = {};
-  Map product = {};
+  List product = [];
 
   getUserData() async {
     FlutterSecureStorage storage = FlutterSecureStorage();
@@ -55,10 +55,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-              onTap: (){
-                Navigator.pop(context);
-              },
-              child: CircleAvatar( child:  Image.asset( "assets/icons/back.png"),radius: 20,)),
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CircleAvatar(
+              child: Image.asset("assets/icons/back.png"),
+              radius: 20,
+            ),
+          ),
         ),
         actions: [
           InkWell(
@@ -75,131 +79,201 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(text: "Shipping Information", fSize: 20,color: Colors.black,),
+            CustomText(
+              text: "Shipping Information",
+              fSize: 20,
+              color: Colors.black,
+            ),
             userData.isEmpty
                 ? InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingScreen())).then((b) {
-                  getUserData();
-                });
-              },
-              child: Card(
-                color: Colors.orangeAccent,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ShippingScreen(),
+                        ),
+                      ).then((b) {
+                        getUserData();
+                      });
+                    },
+                    child: Card(
+                      color: Colors.orangeAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              spacing: 10,
+                              children: [
+                                Icon(Icons.add_box_rounded),
+                                CustomText(
+                                  text: "Add Shipping Information",
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : Stack(
                     children: [
-                      Column(
-                        spacing: 10,
-                        children: [
-                          Icon(Icons.add_box_rounded),
-                          CustomText(text: "Add Shipping Information",color: Colors.black,),
-                        ],
+                      Card(
+                        color: Colors.orangeAccent,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  CustomText(
+                                    text: "Name : ",
+                                    color: Colors.black,
+                                  ),
+                                  Expanded(
+                                    child: CustomText(
+                                      text: "${userData['name']}",
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  CustomText(
+                                    text: "Phone : ",
+                                    color: Colors.black,
+                                  ),
+                                  Expanded(
+                                    child: CustomText(
+                                      text: "${userData['phone']}",
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: "Address : ",
+                                    color: Colors.black,
+                                  ),
+                                  Expanded(
+                                    child: CustomText(
+                                      text:
+                                          "${userData['street']}, ${userData['upazila']}, ${userData['district']}",
+                                      color: Colors.black,
+                                      maxLine: 3,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 5,
+                        right: 5,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ShippingScreen(),
+                              ),
+                            ).then((v) {
+                              getUserData();
+                            });
+                          },
+                          child: Icon(Icons.edit_note),
+                        ),
+                      ),
+                    ],
+                  ),
+
+            SizedBox(height: 20),
+            CustomText(text: "Products", fSize: 20, color: Colors.black),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: product.length,
+                itemBuilder: (context, index) => Card(
+                  color: Colors.orangeAccent,
+                  child: Row(
+                    spacing: 20,
+                    children: [
+                      Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                              "https://eplay.coderangon.com/storage/${product[index]['image']}",
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              text: "${product[index]['title']}",
+                              color: Colors.black,
+                            ),
+                            CustomText(
+                              text: "brand : ${product[index]['brand']}",
+                              color: Colors.black,
+                            ),
+                            Row(
+                              spacing: 10,
+                              children: [
+                                CustomText(
+                                  text: "BDT ${product[index]['price']}",
+                                  fSize: 16,
+                                  color: Colors.black,
+                                ),
+                                CustomText(
+                                  text: " ${product[index]['old_price']}",
+                                  color: Colors.black,
+                                  td: TextDecoration.lineThrough,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-            )
-                : Stack(
-              children: [
-                Card(
-                  color: Colors.orangeAccent,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            CustomText(text: "Name : ",color: Colors.black,),
-                            Expanded(child: CustomText(text: "${userData['name']}",color: Colors.black,)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            CustomText(text: "Phone : ",color: Colors.black,),
-                            Expanded(child: CustomText(text: "${userData['phone']}",color: Colors.black,)),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(text: "Address : ",color: Colors.black,),
-                            Expanded(
-                              child: CustomText(
-                                text: "${userData['street']}, ${userData['upazila']}, ${userData['district']}",color: Colors.black,
-                                maxLine: 3,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 5,
-                  right: 5,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ShippingScreen())).then((v) {
-                        getUserData();
-                      });
-                    },
-                    child: Icon(Icons.edit_note),
-                  ),
-                ),
-              ],
             ),
 
-            SizedBox(height: 20),
-            CustomText(text: "Products", fSize: 20,color: Colors.black,),
-            Card(
-              color: Colors.orangeAccent,
-              child: Row(
-                spacing: 20,
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage("https://eplay.coderangon.com/storage/${product['image']}"),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(text: "${product['title']}",color: Colors.black,),
-                        CustomText(text: "brand : ${product['brand']}",color: Colors.black,),
-                        Row(
-                          spacing: 10,
-                          children: [
-                            CustomText(text: "BDT ${product['price']}", fSize: 16,color: Colors.black,),
-                            CustomText(text: " ${product['old_price']}",color: Colors.black, td: TextDecoration.lineThrough),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Spacer(),
             CustomButton(
               title: "Checkout",
               onTap: () async {
+                List orderItem= [];
+                for (int i = 0; i < product.length; i++) {
+                  var a = {
+
+                      "product_id": product[i]['id'],
+                      "product_name": product[i]['title'],
+                      "price": product[i]['price'],
+                      "quantity": 1,
+                  };
+                  orderItem.add(a);
+                }
+
                 var checkout = {
                   "customer_name": userData['name'],
                   "customer_phone": userData['phone'],
                   "payment_method": "cod",
-                  "items": [
-                    {"product_id": product['id'], "product_name": product['title'], "price": product['price'], "quantity": 1},
-                  ],
+                  "items": orderItem,
                   "address": {"street": userData['street'], "upazila": userData['upazila'], "district": userData['district']},
                 };
                 log("========Check : ${jsonEncode(checkout)}=====");
