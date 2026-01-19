@@ -2,12 +2,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:my_ecommerce/view/home/ui.dart';
-import 'package:my_ecommerce/view/product/ui.dart';
 import 'package:my_ecommerce/view/widget/button.dart';
 import 'package:my_ecommerce/view/widget/textfiled.dart';
 
 import '../../../controller/auth/login.dart';
+import '../../nav/ui.dart';
 import '../../widget/text.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -71,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 var status = await LoginController.Login(phone : phoneC.text, password : passC.text);
                 log("===${status}===");
                 if (status ){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> HomeScreen()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> Home()));
                 }
 
 

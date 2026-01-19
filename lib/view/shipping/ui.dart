@@ -52,9 +52,18 @@ class _LoginState extends State<ShippingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         title: CustomText(text: "Shipping Information", fSize: 25, ),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: CircleAvatar( child:  Image.asset( "assets/icons/back.png"),radius: 20,)),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

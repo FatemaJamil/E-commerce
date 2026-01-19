@@ -48,9 +48,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         title: CustomText(text: "Checkout", fSize: 25, color: Colors.black),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: CircleAvatar( child:  Image.asset( "assets/icons/back.png"),radius: 20,)),
+        ),
         actions: [
           InkWell(
             onTap: () {

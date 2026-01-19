@@ -23,7 +23,7 @@ class CustomText extends StatelessWidget {
       text,
       maxLines: maxLine?? 1,
       style: TextStyle(
-        color: color ?? Colors.grey,
+        color: color ?? Colors.black,
         fontSize: fSize ?? 15,
         fontWeight: fw ?? FontWeight.normal,
         decoration: td ?? TextDecoration.none,
