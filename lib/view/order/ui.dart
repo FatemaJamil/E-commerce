@@ -67,42 +67,44 @@ class _OrderScreenState extends State<OrderScreen> {
                 ? Center(child: CircularProgressIndicator())
                 : orderData.isEmpty
                 ? CustomText(text: "No Order Found")
-                : ListView.builder(
-              shrinkWrap: true,
-              itemCount: orderData.length,
-              itemBuilder: (context, index) => Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomText(text: "${orderData[index]['order_id']}", fw: FontWeight.bold),
-                          CustomText(text: "COD"),
-                        ],
-                      ),
-                      CustomText(text: "${orderData[index]['customer_name']}  -  ${orderData[index]['customer_phone']}"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: CustomText(
-                              text:
-                              "${orderData[index]['address']['street']}, ${orderData[index]['address']['upazila']},${orderData[index]['address']['district']}",
-                              fSize: 12,
-                              maxLine: 2,
+                : Expanded(
+                  child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: orderData.length,
+                                itemBuilder: (context, index) => Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(text: "${orderData[index]['order_id']}", fw: FontWeight.bold),
+                            CustomText(text: "COD"),
+                          ],
+                        ),
+                        CustomText(text: "${orderData[index]['customer_name']}  -  ${orderData[index]['customer_phone']}"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: CustomText(
+                                text:
+                                "${orderData[index]['address']['street']}, ${orderData[index]['address']['upazila']},${orderData[index]['address']['district']}",
+                                fSize: 12,
+                                maxLine: 2,
+                              ),
                             ),
-                          ),
-                          CustomText(text: "${orderData[index]['total_amount']} BDT", fSize: 13),
-                        ],
-                      ),
-                    ],
+                            CustomText(text: "${orderData[index]['total_amount']} BDT", fSize: 13),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+                                ),
+                              ),
                 ),
-              ),
-            ),
           ],
         ),
       ),

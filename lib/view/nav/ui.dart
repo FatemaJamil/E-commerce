@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_ecommerce/view/cart/ui.dart';
-import 'package:my_ecommerce/view/checkout/ui.dart';
 import 'package:my_ecommerce/view/home/ui.dart';
+import 'package:my_ecommerce/view/log%20out/ui.dart';
 import 'package:my_ecommerce/view/order/ui.dart';
+
 
 
 
 class Home extends StatefulWidget {
   const Home({super.key});
+
 
   @override
   State<Home> createState() => _HomeState();
@@ -20,9 +22,11 @@ class _HomeState extends State<Home> {
     HomeScreen(),
     CartScreen(),
     OrderScreen(),
-    CheckoutScreen(productData: [],),
+    LogOut(),
+    //ProductScreen(title:   categoryList[i]['id'].toString(),),
 
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +53,12 @@ class _HomeState extends State<Home> {
             label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.payment),
-            label: 'Order',
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check_box),
-            label: 'Checkout',
+            icon: Icon(Icons.logout_outlined),
+            label: 'LogOut',
           ),
         ],
       ),

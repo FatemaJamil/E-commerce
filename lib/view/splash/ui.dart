@@ -7,7 +7,6 @@ import '../auth/login/ui.dart';
 import '../auth/ui.dart';
 import '../nav/ui.dart';
 
-import 'dart:developer';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,19 +26,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkToken() async {
     // token read
-    String? token = await storage.read(key: "token");
-    log("==Token: $token==");
+    FlutterSecureStorage storage = FlutterSecureStorage();
+    var t = await storage.read(key: "token");
+    log("==T : $t==");
+    if (t == null) {
 
     // delay for splash effect
     await Future.delayed(const Duration(seconds: 2));
 
-    if (token == null) {
+    if (t == null) {
       // No token → go to AuthScreen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const AuthScreen()),
       );
-    } else if (token.isNotEmpty) {
+    } else if (t.isNotEmpty) {
       // Already logged in → go to Home
       Navigator.pushReplacement(
         context,
@@ -52,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     }
-  }
+  }}
 
 
   @override
