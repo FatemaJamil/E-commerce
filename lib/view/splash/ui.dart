@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     FlutterSecureStorage storage = FlutterSecureStorage();
     var t = await storage.read(key: "token");
     log("==T : $t==");
-    if (t == null) {
+
 
     // delay for splash effect
     await Future.delayed(const Duration(seconds: 2));
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     }
-  }}
+  }
 
 
   @override
