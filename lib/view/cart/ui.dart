@@ -97,6 +97,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ],
                       ),
+
                     ],
                   ),
                 ),
@@ -104,7 +105,12 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
         ),
+
       ),
+
+
+
+
       bottomNavigationBar: Container(
         child: CustomButton(title: "Order Now", onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>CheckoutScreen(productData: cartData)));
