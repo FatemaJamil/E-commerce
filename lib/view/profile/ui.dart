@@ -39,76 +39,91 @@ class _MyProfileState extends State<MyProfile> {
 
             ],
           ),
+          SizedBox(height: 20,),
 
           Container(
-            height: 300,
+            height: 170,
             width: 350,
             child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffFEF6EE),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      spacing: 10,
-                      children: [
-                        Icon(Icons.account_circle_outlined,color: Colors.grey.shade700),
-                        Text("My Profle"),
-                        Spacer(),
-                        InkWell
-                          (
-                          onTap: (){},
-                            child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,))
-                      ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      color: Color(0xffFEF6EE),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        spacing: 10,
+                        children: [
+                          Icon(Icons.account_circle_outlined,color: Colors.grey.shade700),
+                          Text("My Profle"),
+                          Spacer(),
+                          InkWell
+                            (
+                            onTap: (){},
+                              child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,))
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffFEF6EE),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      spacing: 10,
-                      children: [
-                        Icon(Icons.list,color: Colors.grey.shade700),
-                        Text("My Order"),
-                        Spacer(),
-                        InkWell
-                          (
-                            onTap: (){},
-                            child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,))
-                      ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      color: Color(0xffFEF6EE),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        spacing: 10,
+                        children: [
+                          Icon(Icons.list,color: Colors.grey.shade700),
+                          Text("My Order"),
+                          Spacer(),
+                          InkWell
+                            (
+                              onTap: (){},
+                              child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,)),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffFEF6EE),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      spacing: 10,
-                      children: [
-                        Icon(Icons.logout,color: Colors.grey.shade700),
-                        Text("Logout"),
-                        Spacer(),
-                        InkWell
-                          (
-                            onTap: (){},
-                            child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,))
-                      ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      color: Color(0xffFEF6EE),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        spacing: 10,
+                        children: [
+                          Icon(Icons.logout,color: Colors.grey.shade700),
+                          Text("Logout"),
+                          Spacer(),
+                          InkWell
+                            (
+                              onTap: (){},
+                              child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,)),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.white,
+              border:Border.all(width: 1,color: Colors.grey),
+              borderRadius: BorderRadius.circular(6)
             ),
 
           )
