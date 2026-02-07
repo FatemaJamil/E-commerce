@@ -38,7 +38,7 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Color(0xffF4A758),
         title: CustomText(text: "MY ORDERS", fSize: 25),
         centerTitle: true,
       ),

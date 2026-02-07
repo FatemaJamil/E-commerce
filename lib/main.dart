@@ -12,7 +12,7 @@ void main (){
     MaterialApp(
       builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
-      home:MyProfile(),
+      home:SplashScreen(),
 
     )
   );

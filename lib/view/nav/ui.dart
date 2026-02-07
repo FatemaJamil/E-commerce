@@ -4,6 +4,8 @@ import 'package:my_ecommerce/view/home/ui.dart';
 import 'package:my_ecommerce/view/log%20out/ui.dart';
 import 'package:my_ecommerce/view/order/ui.dart';
 
+import '../profile/ui.dart';
+
 
 
 
@@ -22,7 +24,7 @@ class _HomeState extends State<Home> {
     HomeScreen(),
     CartScreen(),
     OrderScreen(),
-    LogOut(),
+    MyProfile(),
     //ProductScreen(title:   categoryList[i]['id'].toString(),),
 
   ];
@@ -57,8 +59,8 @@ class _HomeState extends State<Home> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.logout_outlined),
-            label: 'LogOut',
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
           ),
         ],
       ),

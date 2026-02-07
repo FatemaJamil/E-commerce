@@ -53,7 +53,7 @@ class _CartScreenState extends State<CartScreen> {
       body: ListView.builder(
         itemCount: cartData.length,
         itemBuilder: (context, index) => Card(
-          color: Colors.orangeAccent,
+          color: Color(0xffF4A758),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

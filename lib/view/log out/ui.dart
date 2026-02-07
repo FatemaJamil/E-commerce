@@ -69,7 +69,7 @@ class _LogOutState extends State<LogOut> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Colors.orange,
+            color: Color(0xffF4A758),
           ),
           height: 50,
           width: 100,

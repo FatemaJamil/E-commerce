@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:my_ecommerce/view/log%20out/ui.dart';
+import 'package:my_ecommerce/view/order/ui.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -34,12 +36,15 @@ class _MyProfileState extends State<MyProfile> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset("assets/icons/profile.png",height: 100,width: 100,)
 
             ],
           ),
           SizedBox(height: 20,),
+          Text("Fatema Jamil", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+          SizedBox(height: 15,),
 
           Container(
             height: 170,
@@ -87,7 +92,9 @@ class _MyProfileState extends State<MyProfile> {
                           Spacer(),
                           InkWell
                             (
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderScreen()));
+                              },
                               child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,)),
                         ],
                       ),
@@ -111,7 +118,9 @@ class _MyProfileState extends State<MyProfile> {
                           Spacer(),
                           InkWell
                             (
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>LogOut()));
+                              },
                               child: Icon(Icons.arrow_forward_ios_outlined,size: 16,color: Colors.grey,)),
                         ],
                       ),
